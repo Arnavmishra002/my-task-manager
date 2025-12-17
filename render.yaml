@@ -2,10 +2,9 @@ services:
   # Backend Service
   - type: web
     name: task-manager-server
-    env: node
+    env: docker
     rootDir: server
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    dockerfilePath: Dockerfile
     envVars:
       - key: JWT_SECRET
         generateValue: true

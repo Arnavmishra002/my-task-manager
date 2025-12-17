@@ -7,8 +7,11 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-RUN npx prisma generate
+
+# Build TypeScript to dist/
+RUN npm run build
 
 EXPOSE 4000
 
-CMD ["npm", "run", "dev"]
+# Start command (Runs migrations then servers)
+CMD ["npm", "start"]
