@@ -3,6 +3,7 @@ services:
   - type: web
     name: task-manager-server
     env: docker
+    plan: free
     rootDir: server
     dockerfilePath: ./server/Dockerfile
     envVars:
@@ -15,6 +16,7 @@ services:
   - type: web
     name: task-manager-client
     env: node
+    plan: free
     rootDir: client
     buildCommand: npm install && npm run build
     startCommand: npm run start
