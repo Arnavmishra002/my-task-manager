@@ -42,7 +42,9 @@ export const useUpdateTask = () => {
         onMutate: async ({ id, data }) => {
             await queryClient.cancelQueries({ queryKey: ['tasks'] });
             const previousTasks = queryClient.getQueryData(['tasks']);
-            queryClient.setQueryData(['tasks'], (old: Task[]) => {
+            // Optimistically update ALL task queries (e.g. ['tasks'], ['tasks', {filter: 'created'}])
+            queryClient.setQueriesData({ queryKey: ['tasks'] }, (old: Task[] | undefined) => {
+                if (!old) return [];
                 return old.map(task => task.id === id ? { ...task, ...data } : task);
             });
             return { previousTasks };
