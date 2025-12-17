@@ -41,8 +41,7 @@ export default function Register() {
         }
     };
 
-    // Debug helper
-    const debugUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:4000';
+
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
