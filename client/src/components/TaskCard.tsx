@@ -1,8 +1,7 @@
-import React from 'react';
 import { Task, useDeleteTask, useUpdateTask } from '../hooks/useTasks';
 import { useAuth } from '../context/AuthContext';
 import clsx from 'clsx';
-import { format } from 'date-fns'; // Assuming date-fns or native
+// import { format } from 'date-fns'; // unused
 
 // Helper for priority colors
 const priorityColors = {

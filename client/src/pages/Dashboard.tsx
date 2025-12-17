@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTasks, Task } from '../hooks/useTasks';
 import { useSocket } from '../hooks/useSocket';
 import TaskCard from '../components/TaskCard';
@@ -89,8 +89,8 @@ export default function Dashboard() {
                                 }
                             }}
                             className={`${tab === t
-                                    ? 'border-indigo-500 text-indigo-600'
-                                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                                ? 'border-indigo-500 text-indigo-600'
+                                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                                 } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm capitalize`}
                         >
                             {t.replace('-', ' ')}

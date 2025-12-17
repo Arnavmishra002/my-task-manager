@@ -6,7 +6,6 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 // Dashboard imported from pages
 // Dashboard imported from pages
 import Dashboard from './pages/Dashboard';
-import Test from './pages/Test';
 
 // Protected Route Wrapper
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {

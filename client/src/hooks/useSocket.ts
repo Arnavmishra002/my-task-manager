@@ -26,16 +26,16 @@ export const useSocket = () => {
                 console.log('Connected to socket server');
             });
 
-            socketRef.current.on('taskCreated', (task) => {
+            socketRef.current.on('taskCreated', (_task) => {
                 queryClient.invalidateQueries({ queryKey: ['tasks'] });
                 // Optionally update cache directly
             });
 
-            socketRef.current.on('taskUpdated', (task) => {
+            socketRef.current.on('taskUpdated', (_task) => {
                 queryClient.invalidateQueries({ queryKey: ['tasks'] });
             });
 
-            socketRef.current.on('taskDeleted', (taskId) => {
+            socketRef.current.on('taskDeleted', (_taskId) => {
                 queryClient.invalidateQueries({ queryKey: ['tasks'] });
             });
 
