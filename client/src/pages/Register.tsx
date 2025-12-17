@@ -37,6 +37,9 @@ export default function Register() {
         }
     };
 
+    // Debug helper
+    const debugUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:4000';
+
     return (
         <div className="flex min-h-screen items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-xl shadow-lg">
@@ -93,6 +96,12 @@ export default function Register() {
                         </button>
                     </div>
                 </form>
+
+                <div className="mt-4 p-2 bg-gray-100 rounded text-xs text-gray-500 break-all">
+                    <p><strong>Debug Info:</strong></p>
+                    <p>API URL: {debugUrl}</p>
+                    <p>Mode: {import.meta.env.MODE}</p>
+                </div>
             </div>
         </div>
     );
