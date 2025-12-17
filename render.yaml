@@ -15,12 +15,19 @@ services:
       mountPath: /var/data
       sizeGB: 1
 
-staticSites:
+      - key: DATABASE_URL
+        value: file:/var/data/dev.db
+    disk:
+      name: sqlite-data
+      mountPath: /var/data
+      sizeGB: 1
+
   # Frontend Static Site
-  - name: task-manager-client
+  - type: static
+    name: task-manager-client
     rootDir: client
     buildCommand: npm install && npm run build
-    publishPath: dist
+    staticPublishPath: ./client/dist
     envVars:
       - key: VITE_API_URL
         fromService:
