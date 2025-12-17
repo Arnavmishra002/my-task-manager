@@ -15,13 +15,6 @@ services:
       mountPath: /var/data
       sizeGB: 1
 
-      - key: DATABASE_URL
-        value: file:/var/data/dev.db
-    disk:
-      name: sqlite-data
-      mountPath: /var/data
-      sizeGB: 1
-
   # Frontend Static Site
   - type: static
     name: task-manager-client
