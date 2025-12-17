@@ -21,11 +21,7 @@ const io = new Server(httpServer, {
 
 app.set('io', io);
 
-app.use(cors({
-    origin: '*',
-    credentials: true, // Note: with origin *, credentials might be ignored by browsers, but for Bearer auth it's fine.
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-}));
+app.use(cors()); // Allow all origins by default for assessment simplicity
 app.use(express.json());
 
 // Basic health check
@@ -34,6 +30,7 @@ app.get('/health', (req, res) => {
 });
 
 // Routes
+app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/tasks', taskRoutes);
 
