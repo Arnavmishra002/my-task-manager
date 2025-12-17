@@ -35,6 +35,14 @@ app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date() });
 });
 
+app.get('/', (req, res) => {
+    res.json({
+        status: 'success',
+        message: 'Collaborative Task Manager API is running! 🚀',
+        documentation: '/api/v1/docs (not implemented)',
+    });
+});
+
 // Routes
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 app.use('/api/v1/auth', authRoutes);
