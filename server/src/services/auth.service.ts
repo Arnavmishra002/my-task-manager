@@ -4,7 +4,8 @@ import { prisma } from '../config/db';
 import { AppError } from '../utils/AppError';
 
 const signToken = (id: number) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET as string, {
+    const secret = process.env.JWT_SECRET || 'fallback-secret-for-dev-only';
+    return jwt.sign({ id }, secret, {
         expiresIn: '7d',
     });
 };

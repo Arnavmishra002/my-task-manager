@@ -24,6 +24,12 @@ app.set('io', io);
 app.use(cors()); // Allow all origins by default for assessment simplicity
 app.use(express.json());
 
+// Request Logger
+app.use((req, res, next) => {
+    console.log(`📥 ${req.method} ${req.originalUrl}`);
+    next();
+});
+
 // Basic health check
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date() });
