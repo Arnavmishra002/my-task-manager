@@ -9,6 +9,7 @@ RUN npm install
 COPY . .
 
 # Build TypeScript to dist/
+RUN npx prisma generate
 RUN npm run build
 
 EXPOSE 4000
