@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://127.0.0.1:4000/api/v1',
+    baseURL: `${import.meta.env.VITE_API_URL || 'http://127.0.0.1:4000'}/api/v1`,
     // withCredentials: true, // Not needed for Bearer token, can cause CORS issues if origin is wildcard-like
 });
 

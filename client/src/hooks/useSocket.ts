@@ -10,7 +10,8 @@ export const useSocket = () => {
 
     useEffect(() => {
         if (token && !socketRef.current) {
-            socketRef.current = io('http://127.0.0.1:4000', {
+            const socketUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:4000';
+            socketRef.current = io(socketUrl, {
                 auth: {
                     token: `Bearer ${token}` // Passing token for handshake auth if needed
                 },
