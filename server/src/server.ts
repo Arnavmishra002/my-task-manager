@@ -7,6 +7,8 @@ import authRoutes from './routes/auth.routes';
 import { AppError } from './utils/AppError';
 
 import taskRoutes from './routes/task.routes';
+import { errorHandler } from './middlewares/error.middleware';
+
 
 dotenv.config();
 
@@ -57,29 +59,12 @@ io.on('connection', (socket) => {
     });
 });
 
-// Error Handling
+// Global Error Handling
 app.all('*', (req, res, next) => {
     next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
-app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-    const statusCode = err.statusCode || 500;
-    const status = err.status || 'error';
-
-    res.status(statusCode).json({
-        status,
-        message: err.message,
-    });
-});
-
-// Socket.io connection handler
-io.on('connection', (socket) => {
-    console.log('Client connected:', socket.id);
-
-    socket.on('disconnect', () => {
-        console.log('Client disconnected:', socket.id);
-    });
-});
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 4000;
 
