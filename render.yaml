@@ -15,13 +15,12 @@ services:
       mountPath: /var/data
       sizeGB: 1
 
+staticSites:
   # Frontend Static Site
-  - type: static
-    name: task-manager-client
-    env: static
+  - name: task-manager-client
     rootDir: client
     buildCommand: npm install && npm run build
-    staticPublishPath: ./dist
+    publishPath: dist
     envVars:
       - key: VITE_API_URL
         fromService:
