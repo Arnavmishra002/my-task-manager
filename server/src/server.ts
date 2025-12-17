@@ -1,0 +1,77 @@
+import express from 'express';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import authRoutes from './routes/auth.routes';
+import { AppError } from './utils/AppError';
+
+import taskRoutes from './routes/task.routes';
+
+dotenv.config();
+
+const app = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+    cors: {
+        origin: "http://localhost:5173", // Vite default port
+        methods: ["GET", "POST", "PUT", "DELETE"]
+    }
+});
+
+app.set('io', io);
+
+app.use(cors({
+    origin: true,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+}));
+app.use(express.json());
+
+// Basic health check
+app.get('/health', (req, res) => {
+    res.json({ status: 'ok', timestamp: new Date() });
+});
+
+// Routes
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/tasks', taskRoutes);
+
+// Socket.io connection handler
+io.on('connection', (socket) => {
+    console.log('Client connected:', socket.id);
+
+    socket.on('disconnect', () => {
+        console.log('Client disconnected:', socket.id);
+    });
+});
+
+// Error Handling
+app.all('*', (req, res, next) => {
+    next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+});
+
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    const statusCode = err.statusCode || 500;
+    const status = err.status || 'error';
+
+    res.status(statusCode).json({
+        status,
+        message: err.message,
+    });
+});
+
+// Socket.io connection handler
+io.on('connection', (socket) => {
+    console.log('Client connected:', socket.id);
+
+    socket.on('disconnect', () => {
+        console.log('Client disconnected:', socket.id);
+    });
+});
+
+const PORT = process.env.PORT || 4000;
+
+httpServer.listen(Number(PORT), '0.0.0.0', () => {
+    console.log(`Server running on port ${PORT}`);
+});
