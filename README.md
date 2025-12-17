@@ -1,6 +1,11 @@
-# Collaborative Task Manager - Full Stack Assessment
+# Collaborative Task Manager
 
-This repository contains a production-ready, full-stack Task Management Application built with the PERN/MERN stack principle (using SQLite/Prisma for this environment). It fully meets the assessment requirements for Authentication, CRUD, and Real-time collaboration.
+![License](https://img.shields.io/badge/license-ISC-blue.svg)
+![Deployment](https://img.shields.io/badge/Deployment-Render-success)
+
+**Live Demo:** [https://task-manager-client-u9sf.onrender.com](https://task-manager-client-u9sf.onrender.com)
+
+A full-stack implementation of a collaborative task management application with real-time updates.
 
 ## 🚀 Features
 
@@ -29,14 +34,37 @@ This repository contains a production-ready, full-stack Task Management Applicat
 ```bash
 cd server
 npm install
+```
+
+### 2. Database Setup
+The project uses SQLite for simplicity.
+```bash
+cd server
+# Generate Prisma Client
 npx prisma generate
-npx prisma migrate dev --name init # Initializes SQLite DB
+# Push Schema to DB (No migration history needed for dev)
+npx prisma db push
+```
+
+### 3. Frontend Setup
+```bash
+cd client
+npm install
+```
+
+### 4. Running the Application
+**Backend:**
+```bash
+cd server
+npm run dev
+```
+
+**Frontend:**
+```bash
+cd client
 npm run dev
 ```
 *Server runs on `http://localhost:4000` (Socket.io enabled).*
-
-### 2. Frontend Setup
-```bash
 cd client
 npm install
 npm run dev
