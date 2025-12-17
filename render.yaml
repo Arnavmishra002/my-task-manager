@@ -9,11 +9,7 @@ services:
       - key: JWT_SECRET
         generateValue: true
       - key: DATABASE_URL
-        value: file:/var/data/dev.db
-    disk:
-      name: sqlite-data
-      mountPath: /var/data
-      sizeGB: 1
+        value: file:./dev.db
 
   # Frontend Service (Converted to Web Service for Stability)
   - type: web
