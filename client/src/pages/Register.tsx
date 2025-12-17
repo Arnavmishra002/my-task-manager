@@ -31,8 +31,12 @@ export default function Register() {
         } catch (error: any) {
             setServerError(error.response?.data?.message || 'Registration failed');
             console.error("Registration Error Details:", error);
+            setServerError(error.response?.data?.message || 'Registration failed');
+            console.error("Registration Error Details:", error);
             const debugMsg = JSON.stringify(error.response?.data || error.message);
-            alert(`Registration Failed: ${debugMsg}`);
+            const targetUrl = error.config?.url || 'unknown';
+            const baseURL = error.config?.baseURL || 'unknown';
+            alert(`Registration Failed: ${debugMsg}\nTarget: ${baseURL}${targetUrl}`);
             if (error.response) console.error("Response Data:", error.response.data);
         }
     };
