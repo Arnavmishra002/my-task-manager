@@ -72,6 +72,12 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 4000;
 
+// Verify Database Connection
+import { prisma } from './config/db';
+prisma.$connect()
+    .then(() => console.log('✅ Database connected successfully'))
+    .catch((err) => console.error('❌ Database connection failed:', err));
+
 httpServer.listen(Number(PORT), '0.0.0.0', () => {
     console.log(`Server running on port ${PORT}`);
 });
