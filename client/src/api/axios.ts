@@ -1,9 +1,11 @@
 import axios from 'axios';
 
-let baseURL = import.meta.env.VITE_API_URL || 'https://task-manager-server-ilev.onrender.com';
-if (!baseURL.startsWith('http')) {
-    baseURL = `https://${baseURL}`;
-}
+// Hardcoded to ensure public access (Render 'host' var returns internal name)
+const baseURL = 'https://task-manager-server-ilev.onrender.com';
+// let baseURL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:4000';
+// if (!baseURL.startsWith('http')) {
+//    baseURL = `https://${baseURL}`;
+// }
 
 const api = axios.create({
     baseURL: `${baseURL}/api/v1`,
