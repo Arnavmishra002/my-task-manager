@@ -22,8 +22,8 @@ const io = new Server(httpServer, {
 app.set('io', io);
 
 app.use(cors({
-    origin: true,
-    credentials: true,
+    origin: '*',
+    credentials: true, // Note: with origin *, credentials might be ignored by browsers, but for Bearer auth it's fine.
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 }));
 app.use(express.json());

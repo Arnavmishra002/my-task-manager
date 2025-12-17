@@ -10,6 +10,8 @@ const api = axios.create({
     // withCredentials: true, // Not needed for Bearer token, can cause CORS issues if origin is wildcard-like
 });
 
+console.log('🔗 API Base URL Configured as:', `${baseURL}/api/v1`);
+
 api.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
     if (token) {
