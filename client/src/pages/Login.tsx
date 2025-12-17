@@ -14,7 +14,7 @@ const loginSchema = z.object({
 type LoginInputs = z.infer<typeof loginSchema>;
 
 export default function Login() {
-    const { register, handleSubmit, formState: { errors } } = useForm<LoginInputs>({
+    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginInputs>({
         resolver: zodResolver(loginSchema),
     });
     const { login } = useAuth();
@@ -70,14 +70,21 @@ export default function Login() {
                         </div>
                     </div>
 
-                    {serverError && <div className="text-red-500 text-sm text-center">{serverError}</div>}
+                    {serverError && (
+                        <div className="p-4 bg-red-50 border border-red-200 rounded-md">
+                            <p className="text-sm text-red-600 text-center font-medium">{serverError}</p>
+                            <p className="text-xs text-red-500 text-center mt-1">If "Network Error", the server might be waking up. Try again in 30s.</p>
+                        </div>
+                    )}
 
                     <div>
                         <button
                             type="submit"
-                            className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            disabled={isSubmitting}
+                            className={`group relative flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${isSubmitting ? 'bg-indigo-400 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700'
+                                }`}
                         >
-                            Sign in
+                            {isSubmitting ? 'Signing in...' : 'Sign in'}
                         </button>
                     </div>
                 </form>
